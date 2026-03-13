@@ -1,123 +1,94 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, Folder } from 'lucide-react';
 import { projects, projectCategories } from '../data/content';
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: 'easeOut' },
-  }),
-};
-
 export default function Projects() {
   const [active, setActive] = useState('All');
-
   const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active);
 
   return (
-    <section id="projects" className="section-padding relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
-      <div className="absolute top-20 right-0 w-72 h-72 rounded-full opacity-10 blur-3xl pointer-events-none" style={{ background: 'var(--color-primary)' }} />
-
+    <section id="projects" className="section-padding bg-[var(--bg-primary)] border-t border-[var(--border-color)]">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} className="text-center mb-12">
-          <motion.p variants={fadeUp} className="text-sm font-semibold text-[var(--color-primary)] uppercase tracking-widest mb-2">My work</motion.p>
-          <motion.h2 variants={fadeUp} custom={1} className="text-3xl md:text-4xl lg:text-5xl font-extrabold gradient-text">Featured Projects</motion.h2>
-        </motion.div>
+        <div className="text-center mb-16 fade-in">
+          <p className="text-sm font-semibold text-[var(--color-primary)] uppercase tracking-[0.2em] mb-3">Showcase</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] tracking-tight">Selected Works</h2>
+        </div>
 
         {/* Filter tabs */}
-        <motion.div
-          initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
-          variants={fadeUp} custom={2}
-          className="flex flex-wrap items-center justify-center gap-2 mb-12"
-        >
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-16 fade-in">
           {projectCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-5 py-2 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer ${
+              className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-200 border ${
                 active === cat
-                  ? 'text-white shadow-lg shadow-[var(--color-primary)]/25'
-                  : 'glass text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  ? 'bg-[var(--color-primary)] border-[var(--color-primary)] text-white shadow-sm'
+                  : 'bg-transparent border-[var(--border-color)] text-[var(--text-secondary)] hover:border-[var(--text-primary)] hover:text-[var(--text-primary)]'
               }`}
-              style={active === cat ? { background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))' } : {}}
             >
               {cat}
             </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Cards */}
-        <motion.div layout className="grid md:grid-cols-2 gap-6 lg:gap-8">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
-              <motion.article
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-                whileHover={{ y: -6 }}
-                className="glass rounded-2xl overflow-hidden transition-all duration-300 glow-hover group"
-              >
-                {/* Image placeholder */}
-                <div className="relative h-48 overflow-hidden flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--color-dark-700), var(--color-dark-600))' }}>
-                  <Folder size={48} className="text-[var(--color-primary)] opacity-30 group-hover:scale-110 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-card)] to-transparent opacity-60" />
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+          {filtered.map((project) => (
+            <article
+              key={project.id}
+              className="card-hover bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-3xl overflow-hidden group flex flex-col"
+            >
+              {/* Representational Image Area */}
+              <div className="relative h-64 overflow-hidden bg-[var(--bg-primary)] border-b border-[var(--border-color)] flex items-center justify-center">
+                <Folder size={64} className="text-[var(--text-secondary)] opacity-10 group-hover:scale-105 transition-transform duration-500" />
+              </div>
+
+              <div className="p-8 lg:p-10 flex-1 flex flex-col">
+                <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">
+                  {project.title}
+                </h3>
+                <p className="text-[var(--text-secondary)] leading-relaxed mb-6 flex-1">
+                  {project.description}
+                </p>
+
+                {/* Tech badges */}
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--text-secondary)]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
 
-                <div className="p-6">
-                  <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2 group-hover:text-[var(--color-primary)] transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
-                    {project.description}
-                  </p>
-
-                  {/* Tech badges */}
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2.5 py-1 rounded-lg text-xs font-medium"
-                        style={{ background: 'var(--color-primary)' + '15', color: 'var(--color-primary)' }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Action buttons */}
-                  <div className="flex gap-3">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium text-white transition-all duration-300 hover:shadow-lg"
-                      style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))' }}
-                    >
-                      <ExternalLink size={14} />
-                      Live Demo
-                    </a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium glass text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
-                    >
-                      <Github size={14} />
-                      Code
-                    </a>
-                  </div>
+                {/* Action buttons */}
+                <div className="flex items-center gap-6">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-transition inline-flex items-center gap-2 text-sm font-bold text-[var(--color-primary)] hover:translate-x-1"
+                  >
+                    Live Demo
+                    <ExternalLink size={16} />
+                  </a>
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-transition inline-flex items-center gap-2 text-sm font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                  >
+                    View Code
+                    <Github size={16} />
+                  </a>
                 </div>
-              </motion.article>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

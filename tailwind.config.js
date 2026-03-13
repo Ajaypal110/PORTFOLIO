@@ -10,18 +10,30 @@ export default {
       },
       colors: {
         primary: {
-          DEFAULT: '#6366f1',
-          light: '#818cf8',
+          DEFAULT: '#3F4F44', // Olive Green
+          light: '#4A5C50',
+          dark: '#2C3930',
         },
-        secondary: '#a855f7',
-        accent: '#f472b6',
+        secondary: {
+          DEFAULT: '#FAFAF9', // Warm White
+          accent: '#DCD7C9', // Warm Stone
+        },
+        accent: '#3F4F44',
         dark: {
-          900: '#0a0a0f',
-          800: '#0f0f1a',
-          700: '#161625',
-          600: '#1e1e30',
-          500: '#2a2a40',
+          1000: '#1A1A1A',
+          950: '#1A1A1A',
+          900: '#27272A',
+          700: '#4A4947',
         },
+        light: {
+          100: '#FAFAF9',
+          200: '#F5F5F4',
+          300: '#E7E7E4',
+        }
+      },
+      boxShadow: {
+        'premium': '0 4px 20px rgba(63, 79, 68, 0.08)',
+        'premium-hover': '0 10px 30px rgba(63, 79, 68, 0.12)',
       },
     },
   },

@@ -69,7 +69,7 @@ export const skillCategories = [
   {
     title: 'Frontend',
     icon: Code2,
-    color: '#6366f1',
+    color: '#3F4F44', // Olive Green
     skills: [
       { name: 'React.js', level: 90 },
       { name: 'Next.js', level: 80 },
@@ -82,7 +82,7 @@ export const skillCategories = [
   {
     title: 'Backend',
     icon: Server,
-    color: '#a855f7',
+    color: '#3F4F44',
     skills: [
       { name: 'Node.js', level: 85 },
       { name: 'Express.js', level: 85 },
@@ -92,7 +92,7 @@ export const skillCategories = [
   {
     title: 'Database',
     icon: Database,
-    color: '#f472b6',
+    color: '#3F4F44',
     skills: [
       { name: 'MongoDB', level: 85 },
       { name: 'Firebase', level: 75 },
@@ -101,7 +101,7 @@ export const skillCategories = [
   {
     title: 'Tools',
     icon: Wrench,
-    color: '#06b6d4',
+    color: '#3F4F44',
     skills: [
       { name: 'Git', level: 85 },
       { name: 'GitHub', level: 90 },

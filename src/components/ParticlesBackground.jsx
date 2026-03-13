@@ -17,26 +17,26 @@ export default function ParticlesBackground() {
         background: { color: { value: 'transparent' } },
         fpsLimit: 60,
         particles: {
-          color: { value: ['#6366f1', '#a855f7', '#f472b6'] },
+          color: { value: ['#4F46E5', '#6366F1', '#D1D5DB'] },
           links: {
-            color: '#6366f1',
+            color: '#4F46E5',
             distance: 150,
             enable: true,
-            opacity: 0.12,
+            opacity: 0.1,
             width: 1,
           },
           move: {
             enable: true,
-            speed: 0.8,
+            speed: 0.6,
             direction: 'none',
-            outModes: { default: 'bounce' },
+            outModes: { default: 'out' },
           },
           number: {
             value: 50,
             density: { enable: true, area: 900 },
           },
           opacity: {
-            value: { min: 0.1, max: 0.4 },
+            value: { min: 0.1, max: 0.3 },
             animation: { enable: true, speed: 0.5, minimumValue: 0.1 },
           },
           shape: { type: 'circle' },
@@ -49,7 +49,7 @@ export default function ParticlesBackground() {
             onHover: { enable: true, mode: 'grab' },
           },
           modes: {
-            grab: { distance: 140, links: { opacity: 0.25 } },
+            grab: { distance: 140, links: { opacity: 0.2 } },
           },
         },
         detectRetina: true,

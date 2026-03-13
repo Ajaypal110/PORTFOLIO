@@ -32,35 +32,11 @@ export default function App() {
     localStorage.setItem('portfolio-theme', next);
   };
 
-  /* Cursor glow */
-  useEffect(() => {
-    const glow = document.createElement('div');
-    glow.classList.add('cursor-glow');
-    document.body.appendChild(glow);
-
-    const handleMove = (e) => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top = e.clientY + 'px';
-    };
-
-    /* Only enable on non-touch devices */
-    const mql = window.matchMedia('(pointer: fine)');
-    if (mql.matches) {
-      window.addEventListener('mousemove', handleMove);
-    }
-
-    return () => {
-      window.removeEventListener('mousemove', handleMove);
-      glow.remove();
-    };
-  }, []);
-
   return (
-    <>
+    <div className={`min-h-screen transition-colors duration-300 ${theme}`}>
       {loading && <Loader onComplete={() => setLoading(false)} />}
 
       <Toaster position="top-right" />
-      <ScrollProgress />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
       <main>
@@ -74,6 +50,6 @@ export default function App() {
 
       <Footer />
       <BackToTop />
-    </>
+    </div>
   );
 }

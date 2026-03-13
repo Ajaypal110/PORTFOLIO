@@ -1,17 +1,7 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Send, Mail, MapPin, Clock, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { contact } from '../data/content';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: 'easeOut' },
-  }),
-};
 
 const initialForm = { name: '', email: '', subject: '', message: '' };
 
@@ -37,7 +27,6 @@ export default function Contact() {
     if (Object.keys(errs).length) return;
 
     setSending(true);
-    setSending(true);
     
     // Construct mailto link
     const mailtoLink = `mailto:${contact.email}?subject=${encodeURIComponent(
@@ -53,10 +42,10 @@ export default function Contact() {
     toast.success('Opening your email client...', {
       duration: 4000,
       style: {
-        background: 'var(--bg-card)',
+        background: 'var(--bg-secondary)',
         color: 'var(--text-primary)',
         border: '1px solid var(--border-color)',
-        backdropFilter: 'blur(12px)',
+        borderRadius: '1rem',
       },
     });
     setForm(initialForm);
@@ -69,139 +58,121 @@ export default function Contact() {
   };
 
   const inputClass = (field) =>
-    `w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-300 glass ${
+    `w-full px-5 py-4 rounded-2xl text-sm outline-none transition-all duration-200 bg-[var(--bg-primary)] border ${
       errors[field]
-        ? 'border-red-500/60 focus:border-red-500'
-        : 'focus:border-[var(--color-primary)]'
-    } text-[var(--text-primary)] placeholder-[var(--text-secondary)]`;
+        ? 'border-red-500/50 focus:border-red-500'
+        : 'border-[var(--border-color)] focus:border-[var(--color-primary)] focus:shadow-sm'
+    } text-[var(--text-primary)] placeholder-[var(--text-secondary)]/50`;
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
-      <div className="absolute top-0 left-0 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none" style={{ background: 'var(--color-primary)' }} />
-
+    <section id="contact" className="section-padding bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
       <div className="max-w-7xl mx-auto">
-        {/* Heading */}
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} className="text-center mb-16">
-          <motion.p variants={fadeUp} className="text-sm font-semibold text-[var(--color-primary)] uppercase tracking-widest mb-2">Get in touch</motion.p>
-          <motion.h2 variants={fadeUp} custom={1} className="text-3xl md:text-4xl lg:text-5xl font-extrabold gradient-text">Contact Me</motion.h2>
-        </motion.div>
+        {/* Heading Section */}
+        <div className="text-center mb-16 fade-in">
+          <p className="text-sm font-semibold text-[var(--color-primary)] uppercase tracking-[0.2em] mb-3">Connection</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] tracking-tight">Initiate Inquiry</h2>
+        </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Info column */}
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
-            className="lg:col-span-2 space-y-6"
-          >
-            <motion.p variants={fadeUp} className="text-[var(--text-secondary)] leading-relaxed">
-              Have a project in mind or need help with a bug? Feel free to reach out. I'm always excited to discuss new opportunities and challenges.
-            </motion.p>
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-20">
+          {/* Info Side */}
+          <div className="lg:col-span-2 space-y-10 fade-in">
+            <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
+              Seeking collaboration on high-impact projects or technical architectural guidance. My inbox is monitored for professional inquiries.
+            </p>
 
-            {[
-              { icon: Mail, label: 'Email', value: contact.email },
-              { icon: MapPin, label: 'Location', value: contact.location },
-              { icon: Clock, label: 'Status', value: contact.availability },
-            ].map((item, i) => (
-              <motion.div
-                key={item.label}
-                variants={fadeUp}
-                custom={i + 1}
-                className="flex items-center gap-4"
-              >
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))' }}>
-                  <item.icon size={20} className="text-white" />
+            <div className="space-y-8">
+              {[
+                { icon: Mail, label: 'Standard Communication', value: contact.email },
+                { icon: MapPin, label: 'Regional Presence', value: contact.location },
+                { icon: Clock, label: 'Current Availability', value: contact.availability },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center gap-6">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--color-primary)]">
+                    <item.icon size={22} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] mb-1">{item.label}</p>
+                    <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-tight">{item.value}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs text-[var(--text-secondary)] uppercase tracking-wider">{item.label}</p>
-                  <p className="text-sm font-medium text-[var(--text-primary)]">{item.value}</p>
-                </div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
 
-            {/* Availability badge */}
-            <motion.div variants={fadeUp} custom={4} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass">
-              <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-sm font-medium text-green-400">Available for freelance work</span>
-            </motion.div>
-          </motion.div>
+            {/* Status Indicator */}
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)]">
+              <span className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]" />
+              <span className="text-xs font-black uppercase tracking-widest text-[var(--text-primary)]">Ready for Engagement</span>
+            </div>
+          </div>
 
-          {/* Form column */}
-          <motion.form
+          {/* Inquiry Form */}
+          <form
             onSubmit={handleSubmit}
-            initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
-            className="lg:col-span-3 glass rounded-2xl p-6 md:p-8"
+            className="lg:col-span-3 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-[2.5rem] p-8 lg:p-12 fade-in"
           >
-            <div className="grid sm:grid-cols-2 gap-4 mb-4">
-              <motion.div variants={fadeUp}>
+            <div className="grid sm:grid-cols-2 gap-6 mb-6">
+              <div>
                 <input
                   type="text"
-                  placeholder="Your Name"
+                  placeholder="Identity / Entity Name"
                   value={form.name}
                   onChange={handleChange('name')}
                   className={inputClass('name')}
-                  id="contact-name"
                 />
-                {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name}</p>}
-              </motion.div>
-              <motion.div variants={fadeUp} custom={1}>
+                {errors.name && <p className="text-[10px] text-red-500 font-bold uppercase mt-2 ml-4">{errors.name}</p>}
+              </div>
+              <div>
                 <input
                   type="email"
-                  placeholder="Your Email"
+                  placeholder="Return Address / Email"
                   value={form.email}
                   onChange={handleChange('email')}
                   className={inputClass('email')}
-                  id="contact-email"
                 />
-                {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
-              </motion.div>
+                {errors.email && <p className="text-[10px] text-red-500 font-bold uppercase mt-2 ml-4">{errors.email}</p>}
+              </div>
             </div>
 
-            <motion.div variants={fadeUp} custom={2} className="mb-4">
+            <div className="mb-6">
               <input
                 type="text"
-                placeholder="Subject"
+                placeholder="Inquiry Subject"
                 value={form.subject}
                 onChange={handleChange('subject')}
                 className={inputClass('subject')}
-                id="contact-subject"
               />
-              {errors.subject && <p className="text-xs text-red-400 mt-1">{errors.subject}</p>}
-            </motion.div>
+              {errors.subject && <p className="text-[10px] text-red-500 font-bold uppercase mt-2 ml-4">{errors.subject}</p>}
+            </div>
 
-            <motion.div variants={fadeUp} custom={3} className="mb-6">
+            <div className="mb-8">
               <textarea
-                placeholder="Your Message"
-                rows={5}
+                placeholder="Detailed Message Details"
+                rows={6}
                 value={form.message}
                 onChange={handleChange('message')}
                 className={`${inputClass('message')} resize-none`}
-                id="contact-message"
               />
-              {errors.message && <p className="text-xs text-red-400 mt-1">{errors.message}</p>}
-            </motion.div>
+              {errors.message && <p className="text-[10px] text-red-500 font-bold uppercase mt-2 ml-4">{errors.message}</p>}
+            </div>
 
-            <motion.button
-              variants={fadeUp}
-              custom={4}
+            <button
               type="submit"
               disabled={sending}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-white transition-all duration-300 hover:shadow-lg hover:shadow-[var(--color-primary)]/25 disabled:opacity-60 cursor-pointer"
-              style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))' }}
+              className="w-full sm:w-auto px-10 py-5 rounded-full font-black uppercase tracking-widest text-white bg-[var(--color-primary)] hover:bg-[var(--color-primary)]/90 transition-all duration-200 shadow-lg shadow-[var(--color-primary)]/20 disabled:opacity-50"
             >
               {sending ? (
-                <>
-                  <Loader2 size={18} className="animate-spin" />
-                  Sending…
-                </>
+                <span className="flex items-center gap-3">
+                  <Loader2 size={20} className="animate-spin" />
+                  Processing…
+                </span>
               ) : (
-                <>
-                  <Send size={18} />
-                  Send Message
-                </>
+                <span className="flex items-center gap-3">
+                  Transmit Inquiry
+                  <Send size={20} />
+                </span>
               )}
-            </motion.button>
-          </motion.form>
+            </button>
+          </form>
         </div>
       </div>
     </section>

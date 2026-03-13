@@ -1,15 +1,5 @@
-import { motion } from 'framer-motion';
-import { Target, Lightbulb, Rocket, Code2 } from 'lucide-react';
+import { Target, Lightbulb, Code2 } from 'lucide-react';
 import { about } from '../data/content';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: 'easeOut' },
-  }),
-};
 
 export default function About() {
   const cards = [
@@ -19,45 +9,32 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="section-padding relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
-      {/* decorative */}
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none" style={{ background: 'var(--color-secondary)' }} />
-
+    <section id="about" className="section-padding bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
       <div className="max-w-7xl mx-auto">
-        {/* Heading */}
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} className="text-center mb-16">
-          <motion.p variants={fadeUp} className="text-sm font-semibold text-[var(--color-primary)] uppercase tracking-widest mb-2">Get to know me</motion.p>
-          <motion.h2 variants={fadeUp} custom={1} className="text-3xl md:text-4xl lg:text-5xl font-extrabold gradient-text">{about.headline}</motion.h2>
-        </motion.div>
-
+        {/* Heading Section */}
+        <div className="text-center mb-16 fade-in">
+          <p className="text-sm font-semibold text-[var(--color-primary)] uppercase tracking-[0.2em] mb-3">Foundation</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] tracking-tight">Personal Narrative</h2>
+        </div>
+ 
         {/* Summary */}
-        <motion.p
-          initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
-          variants={fadeUp} custom={2}
-          className="max-w-3xl mx-auto text-center text-[var(--text-secondary)] text-lg leading-relaxed mb-16"
-        >
+        <p className="max-w-3xl mx-auto text-center text-[var(--text-secondary)] text-lg leading-relaxed mb-16 fade-in">
           {about.summary}
-        </motion.p>
-
+        </p>
+ 
         {/* Detail cards */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {cards.map((card, i) => (
-            <motion.div
+        <div className="grid md:grid-cols-3 gap-8">
+          {cards.map((card) => (
+            <div
               key={card.title}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeUp}
-              custom={i}
-              whileHover={{ y: -6 }}
-              className="glass rounded-2xl p-6 md:p-8 transition-all duration-300 glow-hover"
+              className="card-hover bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-3xl p-8 lg:p-10"
             >
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))' }}>
-                <card.icon size={22} className="text-white" />
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-6 bg-[var(--bg-secondary)] border border-[var(--border-color)] text-[var(--color-primary)]">
+                <card.icon size={24} />
               </div>
-              <h3 className="text-lg font-bold text-[var(--text-primary)] mb-3">{card.title}</h3>
-              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{card.text}</p>
-            </motion.div>
+              <h3 className="text-xl font-bold text-[var(--text-primary)] mb-4">{card.title}</h3>
+              <p className="text-[var(--text-secondary)] leading-relaxed">{card.text}</p>
+            </div>
           ))}
         </div>
       </div>
