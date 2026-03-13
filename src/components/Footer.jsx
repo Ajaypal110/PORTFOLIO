@@ -9,63 +9,55 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-[var(--border-color)]" style={{ background: 'var(--bg-secondary)' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* Brand */}
-          <div>
-            <a href="#home" className="text-xl font-bold gradient-text">&lt;Ajaypal /&gt;</a>
-            <p className="mt-3 text-sm text-[var(--text-secondary)] leading-relaxed max-w-xs">
-              Full Stack Developer specializing in MERN Stack. Building modern web applications that make an impact.
+    <footer className="bg-[var(--bg-primary)] border-t border-[var(--border-color)] py-16 sm:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center">
+          {/* Brand Logo */}
+          <motion.a
+            href="#home"
+            onClick={(e) => { e.preventDefault(); handleClick('#home'); }}
+            className="text-2xl font-bold tracking-tighter text-[var(--text-primary)] mb-8"
+            whileHover={{ scale: 1.02 }}
+          >
+            AJAYPAL<span className="text-[var(--color-primary)]">.</span>
+          </motion.a>
+
+          {/* Navigation Links */}
+          <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-12">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => { e.preventDefault(); handleClick(link.href); }}
+                className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Social Icons */}
+          <div className="flex items-center gap-6 mb-16">
+            {hero.socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-200 p-2"
+                aria-label={s.label}
+              >
+                <s.icon size={20} />
+              </a>
+            ))}
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="w-full pt-8 border-t border-[var(--border-color)] flex flex-col items-center gap-6">
+            <p className="text-xs font-medium text-[var(--text-secondary)] text-center">
+              © {new Date().getFullYear()} Ajaypal Singh. Crafted with <Heart size={12} className="inline-block text-red-500/60 mx-1" /> from India.
             </p>
           </div>
-
-          {/* Quick links */}
-          <div>
-            <h4 className="text-sm font-semibold text-[var(--text-primary)] uppercase tracking-wider mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {navLinks.slice(0, 6).map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => { e.preventDefault(); handleClick(link.href); }}
-                    className="text-sm text-[var(--text-secondary)] hover:text-[var(--color-primary)] transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div>
-            <h4 className="text-sm font-semibold text-[var(--text-primary)] uppercase tracking-wider mb-4">Connect</h4>
-            <div className="flex gap-3">
-              {hero.socials.map((s) => (
-                <motion.a
-                  key={s.label}
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.15, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-xl glass flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--color-primary)] transition-colors"
-                  aria-label={s.label}
-                >
-                  <s.icon size={18} />
-                </motion.a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Divider + copyright */}
-        <div className="mt-10 pt-6 border-t border-[var(--border-color)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--text-secondary)]">
-          <p className="flex items-center gap-1">
-            © {new Date().getFullYear()} Ajaypal Singh. Built with <Heart size={12} className="text-red-500" /> and React.
-          </p>
-          <p>All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -26,23 +26,16 @@ export default function Skills() {
                 <h3 className="text-2xl font-bold text-[var(--text-primary)]">{cat.title}</h3>
               </div>
  
-              {/* Enhanced Skills List */}
-              <div className="space-y-6">
-                {cat.skills.map((skill, si) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between text-sm font-medium mb-2">
-                      <span className="text-[var(--text-primary)]">{skill.name}</span>
-                      <span className="text-[var(--text-secondary)] opacity-60">{skill.level}%</span>
+              {/* Icon Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                {cat.skills.map((skill) => (
+                  <div key={skill.name} className="flex flex-col items-center gap-3 group">
+                    <div className="w-14 h-14 rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)] flex items-center justify-center text-[var(--text-secondary)] group-hover:text-[var(--color-primary)] group-hover:border-[var(--color-primary)] transition-all duration-300">
+                      <skill.icon size={28} />
                     </div>
-                    <div className="h-1.5 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, ease: 'easeOut' }}
-                        className="h-full bg-[var(--color-primary)] rounded-full"
-                      />
-                    </div>
+                    <span className="text-xs font-bold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors text-center">
+                      {skill.name}
+                    </span>
                   </div>
                 ))}
               </div>

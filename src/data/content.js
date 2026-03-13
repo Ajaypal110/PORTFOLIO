@@ -18,8 +18,21 @@ import {
   Quote,
 } from 'lucide-react';
 
-import { FaInstagram } from 'react-icons/fa';
-import { SiFiverr } from 'react-icons/si';
+import { FaInstagram, FaReact, FaHtml5, FaCss3Alt, FaNodeJs, FaGitAlt, FaGithub } from 'react-icons/fa';
+import { 
+  SiFiverr, 
+  SiNextdotjs, 
+  SiJavascript, 
+  SiTailwindcss, 
+  SiExpress, 
+  SiMongodb, 
+  SiFirebase, 
+  SiPostman, 
+  SiRazorpay,
+  SiMysql,
+  SiEjs,
+  SiJquery
+} from 'react-icons/si';
 
 /* ============================================================
    All portfolio content lives here – edit once, used everywhere.
@@ -69,14 +82,14 @@ export const skillCategories = [
   {
     title: 'Frontend',
     icon: Code2,
-    color: '#3F4F44', // Olive Green
+    color: '#3F4F44',
     skills: [
-      { name: 'React.js', level: 90 },
-      { name: 'Next.js', level: 80 },
-      { name: 'JavaScript', level: 90 },
-      { name: 'HTML5', level: 95 },
-      { name: 'CSS3', level: 90 },
-      { name: 'Tailwind CSS', level: 88 },
+      { name: 'React.js', icon: FaReact },
+      { name: 'Next.js', icon: SiNextdotjs },
+      { name: 'JavaScript', icon: SiJavascript },
+      { name: 'HTML5', icon: FaHtml5 },
+      { name: 'CSS3', icon: FaCss3Alt },
+      { name: 'Tailwind CSS', icon: SiTailwindcss },
     ],
   },
   {
@@ -84,9 +97,11 @@ export const skillCategories = [
     icon: Server,
     color: '#3F4F44',
     skills: [
-      { name: 'Node.js', level: 85 },
-      { name: 'Express.js', level: 85 },
-      { name: 'REST APIs', level: 88 },
+      { name: 'Node.js', icon: FaNodeJs },
+      { name: 'Express.js', icon: SiExpress },
+      { name: 'EJS', icon: SiEjs },
+      { name: 'jQuery', icon: SiJquery },
+      { name: 'REST APIs', icon: Globe },
     ],
   },
   {
@@ -94,8 +109,9 @@ export const skillCategories = [
     icon: Database,
     color: '#3F4F44',
     skills: [
-      { name: 'MongoDB', level: 85 },
-      { name: 'Firebase', level: 75 },
+      { name: 'MongoDB', icon: SiMongodb },
+      { name: 'SQL', icon: SiMysql },
+      { name: 'Firebase', icon: SiFirebase },
     ],
   },
   {
@@ -103,11 +119,11 @@ export const skillCategories = [
     icon: Wrench,
     color: '#3F4F44',
     skills: [
-      { name: 'Git', level: 85 },
-      { name: 'GitHub', level: 90 },
-      { name: 'Postman', level: 80 },
-      { name: 'Razorpay', level: 75 },
-      { name: 'VS Code', level: 95 },
+      { name: 'Git', icon: FaGitAlt },
+      { name: 'GitHub', icon: FaGithub },
+      { name: 'Postman', icon: SiPostman },
+      { name: 'Razorpay', icon: SiRazorpay },
+      { name: 'VS Code', icon: Wrench },
     ],
   },
 ];

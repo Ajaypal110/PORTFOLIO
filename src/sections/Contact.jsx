@@ -1,14 +1,21 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Send, Mail, MapPin, Clock, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import emailjs from '@emailjs/browser';
 import { contact } from '../data/content';
 
 const initialForm = { name: '', email: '', subject: '', message: '' };
 
 export default function Contact() {
+  const formRef = useRef();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
+
+  // EmailJS Configuration - REPLACE PLACEHOLDERS
+  const SERVICE_ID = 'Ajay@110125';
+  const TEMPLATE_ID = 'template_50nhnb8'; 
+  const PUBLIC_KEY = '0xjutl8DL6lunqORh';  
 
   const validate = () => {
     const e = {};
@@ -27,29 +34,33 @@ export default function Contact() {
     if (Object.keys(errs).length) return;
 
     setSending(true);
-    
-    // Construct mailto link
-    const mailtoLink = `mailto:${contact.email}?subject=${encodeURIComponent(
-      form.subject
-    )}&body=${encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-    )}`;
-    
-    // Open default mail client
-    window.location.href = mailtoLink;
 
-    setSending(false);
-    toast.success('Opening your email client...', {
-      duration: 4000,
-      style: {
-        background: 'var(--bg-secondary)',
-        color: 'var(--text-primary)',
-        border: '1px solid var(--border-color)',
-        borderRadius: '1rem',
-      },
-    });
-    setForm(initialForm);
-    setErrors({});
+    try {
+      // Direct Email Sending via EmailJS sendForm
+      await emailjs.sendForm(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        formRef.current,
+        PUBLIC_KEY
+      );
+
+      toast.success('Message sent successfully!', {
+        duration: 4000,
+        style: {
+          background: 'var(--bg-secondary)',
+          color: 'var(--text-primary)',
+          border: '1px solid var(--border-color)',
+          borderRadius: '1rem',
+        },
+      });
+      setForm(initialForm);
+      setErrors({});
+    } catch (error) {
+      console.error('EmailJS Error Detail:', error);
+      toast.error(`Error: ${error.text || 'Failed to send'}. Check console.`);
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleChange = (field) => (e) => {
@@ -92,7 +103,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest text-[var(--text-secondary)] mb-1">{item.label}</p>
-                    <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-tight">{item.value}</p>
+                    <p className="text-sm font-bold text-[var(--text-primary)] tracking-tight">{item.value}</p>
                   </div>
                 </div>
               ))}
@@ -107,6 +118,7 @@ export default function Contact() {
 
           {/* Inquiry Form */}
           <form
+            ref={formRef}
             onSubmit={handleSubmit}
             className="lg:col-span-3 bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-[2.5rem] p-8 lg:p-12 fade-in"
           >
@@ -114,6 +126,7 @@ export default function Contact() {
               <div>
                 <input
                   type="text"
+                  name="from_name"
                   placeholder="Identity / Entity Name"
                   value={form.name}
                   onChange={handleChange('name')}
@@ -124,6 +137,7 @@ export default function Contact() {
               <div>
                 <input
                   type="email"
+                  name="from_email"
                   placeholder="Return Address / Email"
                   value={form.email}
                   onChange={handleChange('email')}
@@ -136,6 +150,7 @@ export default function Contact() {
             <div className="mb-6">
               <input
                 type="text"
+                name="subject"
                 placeholder="Inquiry Subject"
                 value={form.subject}
                 onChange={handleChange('subject')}
@@ -146,6 +161,7 @@ export default function Contact() {
 
             <div className="mb-8">
               <textarea
+                name="message"
                 placeholder="Detailed Message Details"
                 rows={6}
                 value={form.message}
@@ -163,7 +179,7 @@ export default function Contact() {
               {sending ? (
                 <span className="flex items-center gap-3">
                   <Loader2 size={20} className="animate-spin" />
-                  Processing…
+                  Transmitting…
                 </span>
               ) : (
                 <span className="flex items-center gap-3">
