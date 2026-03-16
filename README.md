@@ -1,16 +1,80 @@
-# React + Vite
+# Ajaypal Singh – Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is my personal developer portfolio website showcasing my full stack projects, technical skills and contact information. The portfolio highlights production-level MERN applications including SaaS platforms, marketplaces and ecommerce systems.
 
-Currently, two official plugins are available:
+## Live Website
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+(https://portfolio-ajaypalsingh.vercel.app)
 
-## React Compiler
+## Portfolio Sections
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- About me
+- Skills
+- Projects showcase
+- Contact form
+- Resume download
+- GitHub links
 
-## Expanding the ESLint configuration
+## Featured Projects
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Arlyon – Dating Platform
+Dating SaaS platform with chat, video calling, notifications and subscriptions.
+
+### Khammaghani – Food Ordering Platform
+Multi-role food delivery platform with Razorpay payments and dashboards.
+
+### Wanderlust – Listing Platform
+Property listing platform with authentication and Cloudinary image uploads.
+
+## Tech Stack
+
+Frontend:
+- React
+- JavaScript
+- HTML
+- CSS
+
+Deployment:
+- Vercel
+
+Tools:
+- Git
+- GitHub
+
+## Features
+
+- Responsive design
+- Modern UI
+- Project showcase
+- Contact integration
+- Resume download option
+
+## Installation
+
+Clone repository:
+
+git clone https://github.com/Ajaypal110/portfolio
+
+Install dependencies:
+
+npm install
+
+Run project:
+
+npm run dev
+
+## Future Improvements
+
+- Dark mode
+- Blog section
+- Project filtering
+- Performance optimization
+
+## Author
+
+Ajaypal Singh
+
+Full Stack MERN Developer
+
+GitHub:
+https://github.com/Ajaypal110
