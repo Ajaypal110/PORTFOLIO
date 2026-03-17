@@ -142,6 +142,17 @@ export const projects = [
     githubUrl: 'https://github.com/Ajaypal110/KhammaGhani',
   },
   {
+    id: 5,
+    title: 'Arlyon - Modern Dating Platform',
+    description:
+      'A feature-rich dating application with real-time chat via Socket.io, P2P video/audio calling using WebRTC, and secure Google OAuth integration.',
+    image: '/projects/arlyon.png',
+    tags: ['React', 'Node.js', 'MongoDB', 'Socket.io', 'WebRTC', 'Redux'],
+    category: 'Full Stack',
+    liveUrl: 'https://arlyon.vercel.app/',
+    githubUrl: 'https://github.com/Ajaypal110/Arlyon',
+  },
+  {
     id: 4,
     title: 'Wanderlust - Accommodation Listing',
     description:
