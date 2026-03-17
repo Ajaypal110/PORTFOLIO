@@ -55,7 +55,7 @@ export const hero = {
   title: 'Full Stack Developer',
   highlight: 'MERN Stack',
   bio: 'I build modern, scalable web applications with clean code and pixel-perfect designs. Specializing in React, Node.js, and MongoDB — turning ideas into performant digital experiences.',
-  resumeUrl: '/Ajaypal_Singh_Resume.pdf',
+  resumeUrl: '/AjaypalSinghResume.pdf',
   socials: [
     { icon: Github, label: 'GitHub', url: 'https://github.com/' },
     { icon: Linkedin, label: 'LinkedIn', url: 'https://linkedin.com/in/' },
